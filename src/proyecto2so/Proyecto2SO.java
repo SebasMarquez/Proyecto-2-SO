@@ -5,6 +5,8 @@
  */
 package proyecto2so;
 
+import interfaz.Interfaz;
+
 /**
  *
  * @author SebasBD
@@ -16,6 +18,9 @@ public class Proyecto2SO {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Interfaz interfaz = new Interfaz();
+        interfaz.setVisible(true);
+       
     }
     
 }

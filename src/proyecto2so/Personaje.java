@@ -30,8 +30,8 @@ public class Personaje {
     private int puntosUnicos; // Puntos únicos según nivel de prioridad
     private Set<String> habilidadesEspeciales; // Habilidades especiales
     
-    private static final String[] UN_SHOW_MAS_NOMBRES = {"Mordecai", "Rigby", "Papaleta", "Skips", "Benson", "Fantasmano","Musculoso", "CJ", "Margarita", "Eileen"};
-    private static final String[] LA_LEYENDA_DE_AANG_NOMBRES = {"Aang", "Katara", "Sokka", "Zuko", "Toph", "Iroh", "Azula", "Appa", "Momo", "Bumi"};
+    private static final String[] UN_SHOW_MAS_NOMBRES = {"MORDECAI", "RIGBY", "PAPALETA", "SKIPS", "BENSON", "FANTASMANO","MUSCULOSO", "CJ", "MARGARITA", "EILEEN"};
+    private static final String[] LA_LEYENDA_DE_AANG_NOMBRES = {"AANG", "KATARA", "SOKKA", "ZUKO", "TOPH", "IROH", "AZULA", "APPA", "MOMO", "BUMI"};
     
     private Personaje(String nombre, String estudio){
         this.id = idContador++;
@@ -124,7 +124,6 @@ public class Personaje {
 
         personajeRondaContador++;
         if(personajeRondaContador == 8 & nivelPrioridad != 1){
-//            System.out.println("Promoción por " + characterRoundCounter + " combates para " + name + id);
         }
         if (personajeRondaContador == 8) {
             personajeRondaContador = 0; // Resetea el round counter
@@ -135,7 +134,7 @@ public class Personaje {
         }
     }
 
-// AQUI SE PASAN A LA COLA DE MAYOR PRIORIDAD (AUN NO SE BORRA EL ANTERIOR POR LO QUE QUEDAN DUPLICADOS)
+
     private static Map<String, Integer> personajesARemoverCN = new HashMap<>();
     private static Map<String, Integer> personajesARemoverN = new HashMap<>();
 
@@ -149,7 +148,6 @@ public class Personaje {
             nivelPrioridad--;
 
             Admin.mejoraACola(personaje, cnCola1, cnCola2, cnCola3);
-//            System.out.println("SE SUBIO EL NIVEL DE PRIORIDAD DE "+character+"-------------------------");
         } else {
             personajesARemoverN.put(nombreId, prioridadARemover);
             nivelPrioridad--;

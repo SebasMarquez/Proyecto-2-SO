@@ -5,7 +5,9 @@
  */
 package proyecto2so;
 
+import interfaz.Interfaz;
 import java.util.Random;
+import javax.swing.JLabel;
 
 /**
  *
@@ -13,14 +15,14 @@ import java.util.Random;
  */
 public class Admin {
     public static int contadorRondas = 0;
-    public static Cola<Personaje> cnCola1; // Colas para CartoonNetwork 
+    public static Cola<Personaje> cnCola1;  
     public static Cola<Personaje> cnCola2;
     public static Cola<Personaje> cnCola3;
-    public static Cola<Personaje> nickCola1; // Colas para Nickelodeon 
+    public static Cola<Personaje> nickCola1;
     public static Cola<Personaje> nickCola2;
     public static Cola<Personaje> nickCola3;
-    public static Cola<Personaje> colaRefuerzoCN; // Cola de refuerzo para CartoonNetwork
-    public static Cola<Personaje> colaRefuerzoNick; // Cola de refuerzo para Nickelodeon
+    public static Cola<Personaje> colaRefuerzoCN; 
+    public static Cola<Personaje> colaRefuerzoNick; 
     
     public Admin(){
         cnCola1 = new Cola<>();
@@ -56,7 +58,7 @@ public class Admin {
                 return colas[i].desencolar();
             }
         }
-        return null; // Si todas las colas están vacías
+        return null; 
     }
     
     public Personaje[] seleccionarPersonajesParaPelear() {
@@ -87,6 +89,15 @@ public class Admin {
             Personaje personaje = colaRefuerzo.desencolar();
             colaPrioridad.encolar(personaje);
         }
+    }
+    
+    public static void generarPersonajes() {
+        Personaje USMPersonaje = Personaje.crearUSMPersonaje();
+        Personaje LLDAPersonaje = Personaje.crearLLDAPersonaje();
+        
+        agregarACola(USMPersonaje, cnCola1, cnCola2, cnCola3);
+        agregarACola(LLDAPersonaje, nickCola1, nickCola2, nickCola3);
+
     }
     
     // Sube los personajes en la posicion 1 de las colas. 
@@ -125,15 +136,13 @@ public class Admin {
     }
 
     public static boolean deberiaGenerarPersonaje() {
-        // Devolver true con una probabilidad del 80% (Para generar personajes)
         return new Random().nextInt(100) < 80;
     }
     
     public static boolean deberiaMoverAPrioridad1() {
-        // Devuelve true con un 40% de probabilidad (para sacar de la cola de refuerzo)
         return new Random().nextInt(100) < 40;
     }
-    //Lógica para aumentar contadores de Characters
+    //Lógica para aumentar contadores de Personajes
 
     public static void incrementarContadorRondas() {
         Cola<Personaje>[] todasColas = new Cola[]{
@@ -145,7 +154,7 @@ public class Admin {
             incrementarColaContadorRondas(cola);
         }
     }
-// Lógica para aumentar el nivel de prioridad (Subir de Queue)
+// Lógica para aumentar el nivel de prioridad (Subir de Cola)
 
     private static void incrementarColaContadorRondas(Cola<Personaje> cola) {
         Cola<Personaje> colaTemporal = new Cola<>();
@@ -158,5 +167,130 @@ public class Admin {
             cola.encolar(colaTemporal.desencolar());
         }
     }
+    
+    private static Cola<Personaje> getColaUSM(int index) {
+        switch (index) {
+            case 1:
+                return cnCola1;
+            case 2:
+                return cnCola2;
+            case 3:
+                return cnCola3;
+            case 4:
+                return colaRefuerzoCN;
+            default:
+                return null;
+        }
+    }
 
+    private static Cola<Personaje> getColaLLDA(int index) {
+        switch (index) {
+            case 1:
+                return nickCola1;
+            case 2:
+                return nickCola2;
+            case 3:
+                return nickCola3;
+            case 4:
+                return colaRefuerzoNick;
+            default:
+                return null;
+        }
+    }
+    
+    // Método para actualizar las colas en los JLabel
+    public static void actualizarColasEnInterfaz() {
+        // Para USM
+        for (int i = 0; i < 4; i++) {
+            StringBuilder resultadoUSM = new StringBuilder();
+            JLabel colasUSM = Interfaz.getColasUSM(i + 1);
+
+            if (colasUSM != null) {
+                Cola<Personaje> colaActual;
+
+                // Determinar la cola actual según el índice
+                if (i < 3) {
+                    resultadoUSM.append("Cola USM " + (i + 1) + ":\n");
+                    colaActual = getColaUSM(i + 1);
+                } else {
+                    resultadoUSM.append("Cola de Refuerzon CN:\n");
+                    colaActual = colaRefuerzoCN;
+                }
+
+                resultadoUSM.append(printColaAString(colaActual));
+                colasUSM.setText(resultadoUSM.toString());
+            }
+        }
+        
+        // Para LLDA
+        for (int i = 0; i < 4; i++) {
+            StringBuilder resultadoLLDA = new StringBuilder();
+            JLabel colasLLDA = Interfaz.getColasLLDA(i + 1);
+
+            if (colasLLDA != null) {
+                Cola<Personaje> colaActual;
+
+                // Determinar la cola actual según el índice
+                if (i < 3) {
+                    resultadoLLDA.append("Cola Nick " + (i + 1) + ":\n");
+                    colaActual = getColaLLDA(i + 1);
+                } else {
+                    resultadoLLDA.append("Cola de Refuerzo Nick:\n");
+                    colaActual = colaRefuerzoNick;
+                }
+
+                resultadoLLDA.append(printColaAString(colaActual));
+                colasLLDA.setText(resultadoLLDA.toString());
+            }
+        }
+    }
+    
+    private static <T> String printColaAString(Cola<T> cola) {
+        Cola<T> colaTemporal = new Cola<>();
+        StringBuilder resultado = new StringBuilder();
+        while (!cola.estaVacia()) {
+            T data = cola.desencolar();
+            resultado.append(data).append(" ");
+            colaTemporal.encolar(data);
+        }
+        resultado.append("\n");
+        while (!colaTemporal.estaVacia()) {
+            cola.encolar(colaTemporal.desencolar());
+        }
+        return resultado.toString();
+    }
+    
+    public void printColas() {
+        System.out.println("Colas CartoonNetwork: ");
+        printColas(cnCola1, cnCola2, cnCola3);
+
+        System.out.println("\nCola de Refuerzo CartoonNetwork:");
+        printColas(colaRefuerzoCN);
+
+        System.out.println("\nColas Nickelodeon:");
+        printColas(nickCola1, nickCola2, nickCola3);
+
+        System.out.println("\nCola de Refuerzo CartoonNetwork:");
+        printColas(colaRefuerzoNick);
+    }
+    
+    private <T> void printColas(Cola<T>... colas) {
+        for (int i = 0; i < colas.length; i++) {
+            System.out.print("Colas " + (i + 1) + ": ");
+            printCola(colas[i]);
+        }
+    }
+    
+    private <T> void printCola(Cola<T> cola) {
+        Cola<T> colaTemporal = new Cola<>();
+        while (!cola.estaVacia()) {
+            T data = cola.desencolar();
+            System.out.print(data + " ");
+            colaTemporal.encolar(data);
+        }
+        System.out.println();
+        while (!colaTemporal.estaVacia()) {
+            cola.encolar(colaTemporal.desencolar());
+        }
+    }
 }
