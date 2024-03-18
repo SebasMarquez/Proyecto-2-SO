@@ -5,7 +5,9 @@
  */
 package proyecto2so;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -28,14 +30,17 @@ public class Personaje {
     private int puntosUnicos; // Puntos únicos según nivel de prioridad
     private Set<String> habilidadesEspeciales; // Habilidades especiales
     
+    private static final String[] UN_SHOW_MAS_NOMBRES = {"Mordecai", "Rigby", "Papaleta", "Skips", "Benson", "Fantasmano","Musculoso", "CJ", "Margarita", "Eileen"};
+    private static final String[] LA_LEYENDA_DE_AANG_NOMBRES = {"Aang", "Katara", "Sokka", "Zuko", "Toph", "Iroh", "Azula", "Appa", "Momo", "Bumi"};
+    
     private Personaje(String nombre, String estudio){
         this.id = idContador++;
         this.nombre = nombre;
         this.estudio = estudio;
-        this.habilidades = generateQuality(60);
-        this.vida = generateQuality(70);
-        this.fuerza = generateQuality(50);
-        this.agilidad = generateQuality(40); 
+        this.habilidades = generarCalidad(60);
+        this.vida = generarCalidad(70);
+        this.fuerza = generarCalidad(50);
+        this.agilidad = generarCalidad(40); 
         
         if (contarCalidadAtributos() >= 3) {
             this.exceptional = true;
@@ -54,9 +59,17 @@ public class Personaje {
         this.habilidadesEspeciales = generarHabilidadesEspeciales();
     }
     
-   
+    public static Personaje crearUSMPersonaje(){
+        String nombre = UN_SHOW_MAS_NOMBRES[new Random().nextInt(UN_SHOW_MAS_NOMBRES.length)];
+        return new Personaje(nombre,"USM");
+    }
     
-    private int generateQuality(int baseProbability) {
+    public static Personaje crearLLDAPersonaje(){
+        String nombre = LA_LEYENDA_DE_AANG_NOMBRES[new Random().nextInt(LA_LEYENDA_DE_AANG_NOMBRES.length)];
+        return new Personaje(nombre,"LLDA");
+    }
+    
+    private int generarCalidad(int baseProbability) {
         return new Random().nextInt(100) < baseProbability ? new Random().nextInt(100) + 1 : 0;
     }
     
@@ -105,6 +118,76 @@ public class Personaje {
                 return 0;
         }
     }
+    
+    //Lógica para contador de rounds y cambio de Queue
+    public void aumentarContadorRondas() {
+
+        personajeRondaContador++;
+        if(personajeRondaContador == 8 & nivelPrioridad != 1){
+//            System.out.println("Promoción por " + characterRoundCounter + " combates para " + name + id);
+        }
+        if (personajeRondaContador == 8) {
+            personajeRondaContador = 0; // Resetea el round counter
+            if (nivelPrioridad != 1) {
+
+                aumentarPrioridadYCola(this, Admin.cnCola1, Admin.cnCola2, Admin.cnCola3, Admin.nickCola1, Admin.nickCola2, Admin.nickCola3);
+            }
+        }
+    }
+
+// AQUI SE PASAN A LA COLA DE MAYOR PRIORIDAD (AUN NO SE BORRA EL ANTERIOR POR LO QUE QUEDAN DUPLICADOS)
+    private static Map<String, Integer> personajesARemoverCN = new HashMap<>();
+    private static Map<String, Integer> personajesARemoverN = new HashMap<>();
+
+    private void aumentarPrioridadYCola(Personaje personaje, Cola<Personaje> cnCola1, Cola<Personaje> cnCola2, Cola<Personaje> cnCola3, Cola<Personaje> nickCola1, Cola<Personaje> nickCola2, Cola<Personaje> nickCola3) {
+        String nombreId = nombre + id;
+        int prioridadARemover = nivelPrioridad;
+        // Guardar los datos para su uso posterior
+
+        if (estudio == "CN") {
+            personajesARemoverCN.put(nombreId, prioridadARemover);
+            nivelPrioridad--;
+
+            Admin.mejoraACola(personaje, cnCola1, cnCola2, cnCola3);
+//            System.out.println("SE SUBIO EL NIVEL DE PRIORIDAD DE "+character+"-------------------------");
+        } else {
+            personajesARemoverN.put(nombreId, prioridadARemover);
+            nivelPrioridad--;
+            Admin.mejoraACola(personaje, nickCola1, nickCola2, nickCola3);
+
+        }
+
+    }
+    
+    // Método para utilizar los datos guardados
+
+    public static void removerDeColaCN(Cola<Personaje> cnCola2, Cola<Personaje> cnCola3) {
+        for (Map.Entry<String, Integer> entry : personajesARemoverCN.entrySet()) {
+            String personajeId = entry.getKey();
+            int prioridad = entry.getValue();
+
+            // Realizar operaciones con las colas
+            if (prioridad == 2) {
+                cnCola2.eliminar(personajeId);
+            } else {
+                cnCola3.eliminar(personajeId);
+            }
+        }
+    }
+       public static void removerDeColaN(Cola<Personaje> nickCola2, Cola<Personaje> nickCola3) {
+        for (Map.Entry<String, Integer> entry : personajesARemoverN.entrySet()) {
+            String personajeId = entry.getKey();
+            int prioridad = entry.getValue();
+
+            // Realizar operaciones con las colas
+            if (prioridad == 2) {
+                nickCola2.eliminar(personajeId);
+            } else {
+                nickCola3.eliminar(personajeId);
+            }
+        }
+    }
+
     
     
 
