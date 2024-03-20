@@ -102,7 +102,7 @@ public class Personaje {
     }
     
     private int determinarNumHabilidadesEspeciales() {
-        return new Random().nextInt(2) + 1; // Devuelve 1 o 2 aleatoriamente (dependiendo de el numero  de habilidades será Promedio o Deficiente)
+        return new Random().nextInt(2) + 1; 
     }
     
     private int generarPuntosUnicos() {

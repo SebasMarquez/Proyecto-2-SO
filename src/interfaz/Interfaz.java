@@ -9,6 +9,7 @@ import proyecto2so.Admin;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import proyecto2so.Personaje;
 
 /**
  *
@@ -50,9 +51,9 @@ public class Interfaz extends javax.swing.JFrame {
         ColasUSM2 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         ColasUSM3 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         ColasUSM4 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         Colas2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         ColasLLDA1 = new javax.swing.JLabel();
@@ -102,7 +103,6 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 80, 540, 80));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("FIGHT!");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 190, 80));
 
@@ -112,7 +112,7 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel3.setText("Un Show Mas");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 490, 80));
 
-        Colas.setBackground(new java.awt.Color(0, 0, 102));
+        Colas.setBackground(new java.awt.Color(153, 153, 255));
         Colas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
         Colas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -137,22 +137,22 @@ public class Interfaz extends javax.swing.JFrame {
 
         Colas.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 270, 60));
 
-        ColasUSM4.setBackground(new java.awt.Color(0, 0, 255));
-        ColasUSM4.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        ColasUSM4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jScrollPane5.setViewportView(ColasUSM4);
-
-        Colas.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 270, 60));
-
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Colas de prioridad");
         Colas.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 160, 40));
 
+        ColasUSM4.setBackground(new java.awt.Color(0, 0, 255));
+        ColasUSM4.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        ColasUSM4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jScrollPane5.setViewportView(ColasUSM4);
+
+        Colas.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 270, 60));
+
         jPanel1.add(Colas, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 290, 360));
 
-        Colas2.setBackground(new java.awt.Color(102, 0, 0));
+        Colas2.setBackground(new java.awt.Color(255, 204, 102));
         Colas2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
         Colas2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -197,7 +197,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         cancelLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cancelLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Cancel.png"))); // NOI18N
-        jPanel2.add(cancelLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 420, 150));
+        jPanel2.add(cancelLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 420, 150));
 
         PuntosUnicosLLDA.setBackground(new java.awt.Color(255, 255, 255));
         PuntosUnicosLLDA.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -324,6 +324,7 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(0, 0, 153));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        ganadoresUSM.setBackground(new java.awt.Color(153, 153, 255));
         ganadoresUSM.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         ganadoresUSM.setForeground(new java.awt.Color(255, 255, 255));
         ganadoresUSM.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -334,12 +335,12 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 90, 110, 70));
 
         LLDAFondo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        LLDAFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/LaLeyendaDeAangFondo.jpg"))); // NOI18N
+        LLDAFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/featuredImage.jpg"))); // NOI18N
         LLDAFondo.setToolTipText("");
         jPanel1.add(LLDAFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 0, 760, 780));
 
-        USMFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/USMFONDO1.jpg"))); // NOI18N
-        jPanel1.add(USMFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 780));
+        USMFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Mordecai-and-Rigby-regular-show-30642146-1280-1024.jpg"))); // NOI18N
+        jPanel1.add(USMFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 780));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, -1));
 
@@ -400,9 +401,9 @@ public class Interfaz extends javax.swing.JFrame {
             admin.printColas();
 
             // Seleccionar personajes para el combate desde las colas
-            proyecto2so.Personaje[] personajesParaPelea = admin.seleccionarPersonajesParaPelear();
-            proyecto2so.Personaje USMPersonaje = personajesParaPelea[0];
-            proyecto2so.Personaje LLDAPersonaje = personajesParaPelea[1];
+            Personaje[] personajesParaPelea = admin.seleccionarPersonajesParaPelear();
+            Personaje USMPersonaje = personajesParaPelea[0];
+            Personaje LLDAPersonaje = personajesParaPelea[1];
        
             if (USMPersonaje != null && LLDAPersonaje != null) {
                 System.out.println("Inicia el combate: " + USMPersonaje.getNombre() + " vs " + LLDAPersonaje.getNombre());

@@ -38,7 +38,7 @@ public class Admin {
     }
     
     public void inicializarPersonajes() {
-        for (int i = 0; i < 10; i++) {// probar si es i<10 o i <20
+        for (int i = 0; i < 20; i++) {
             Personaje cnPersonaje = Personaje.crearUSMPersonaje();
             Personaje nickPersonaje = Personaje.crearLLDAPersonaje();
             
@@ -244,7 +244,14 @@ public class Admin {
             }
         }
     }
-    
+    private static <T> String printColasAString(Cola<T>... colas) {
+        StringBuilder resultado = new StringBuilder();
+        for (int i = 0; i < colas.length; i++) {
+            resultado.append("Cola ").append(i + 1).append(": ");
+            resultado.append(printColaAString(colas[i]));
+        }
+        return resultado.toString();
+    }
     private static <T> String printColaAString(Cola<T> cola) {
         Cola<T> colaTemporal = new Cola<>();
         StringBuilder resultado = new StringBuilder();
