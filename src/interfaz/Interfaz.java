@@ -261,11 +261,11 @@ public class Interfaz extends javax.swing.JFrame {
         EstadoIA.setForeground(new java.awt.Color(255, 255, 255));
         EstadoIA.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         EstadoIA.setText("CREANDO COLAS");
-        jPanel2.add(EstadoIA, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 150, 50));
+        jPanel2.add(EstadoIA, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 150, 50));
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Timer (seg)");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 510, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, -1, 20));
 
         empateLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         empateLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/bruja.jpg"))); // NOI18N
@@ -305,9 +305,9 @@ public class Interfaz extends javax.swing.JFrame {
                 SliderAITimerStateChanged(evt);
             }
         });
-        jPanel2.add(SliderAITimer, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 440, 50));
+        jPanel2.add(SliderAITimer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 440, 50));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, 460, 580));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, 460, 590));
 
         jPanel4.setBackground(new java.awt.Color(102, 0, 0));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
